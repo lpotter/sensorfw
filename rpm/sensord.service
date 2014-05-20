@@ -5,9 +5,9 @@ Requires=dbus.socket
 Conflicts=actdead.target
 
 [Service]
-Type=forking 
+Type=forking
 ExecStartPre=/bin/sh /usr/bin/sensord-daemon-conf-setup
-ExecStart=/usr/sbin/sensord -c=/etc/sensorfw/primaryuse.conf -d --log-level=warning --no-magnetometer-bg-calibration
+ExecStart=/usr/sbin/sensord -c=/etc/sensorfw/primaryuse.conf -d --log-level=test --no-magnetometer-bg-calibration
 ExecReload=/bin/kill -HUP $MAINPID
 Restart=always
 RestartSec=1

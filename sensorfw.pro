@@ -1,6 +1,6 @@
 TEMPLATE = subdirs
 CONFIG += ordered
-SUBDIRS = datatypes \ 
+SUBDIRS = datatypes \
           adaptors \
           core \
           filters \
@@ -63,17 +63,17 @@ equals(QT_MAJOR_VERSION, 5):  {
         DBUSCONFIGFILES.path = /etc/dbus-1/system.d
 
         SENSORDCONFIGFILE.files = config/sensord-rx_51.conf \
-		config/sensord-oaktrail.conf \
-		config/sensord-exopc.conf \
-		config/sensord-aava.conf \
-		config/sensord-rm_696.conf \
-		config/sensord-arm_grouper_0000.conf \
-		config/sensord-mrst_cdk.conf \
-		config/sensord-ncdk.conf \
-		config/sensord.conf \
-		config/sensord-rm_680.conf \
-		config/sensord-icdk.conf \
-		config/sensord-u8500.conf \
+        config/sensord-oaktrail.conf \
+        config/sensord-exopc.conf \
+        config/sensord-aava.conf \
+        config/sensord-rm_696.conf \
+        config/sensord-arm_grouper_0000.conf \
+        config/sensord-mrst_cdk.conf \
+        config/sensord-ncdk.conf \
+        config/sensord.conf \
+        config/sensord-rm_680.conf \
+        config/sensord-icdk.conf \
+        config/sensord-u8500.conf \
 
         SENSORDCONFIGFILE.path = /etc/sensorfw
 
@@ -93,7 +93,8 @@ equals(QT_MAJOR_VERSION, 5):  {
     OTHER_FILES += rpm/sensorfw-qt5.spec \
                    rpm/sensorfw-qt5.yaml
     OTHER_FILES += rpm/sensorfw-qt5-hybris.spec \
-                   rpm/sensorfw-qt5-hybris.yaml
+                   rpm/sensorfw-qt5-hybris.yaml \
+                   rpm/sensord.service
 
 }
 OTHER_FILES += config/*
