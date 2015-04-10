@@ -59,9 +59,9 @@ void HybrisAccelerometerAdaptor::processSample(const sensors_event_t& data)
     AccelerationData *d = buffer->nextSlot();
     d->timestamp_ = quint64(data.timestamp * .001);
     // sensorfw wants milli-G'
-    d->x_ = -(data.data[0] / 9.80665 * 1000);
-    d->y_ = -(data.data[1] / 9.80665 * 1000);
-    d->z_ = -(data.data[2] / 9.80665 * 1000);
+    d->x_ = (data.data[0] / 9.80665 * 1000);
+    d->y_ = (data.data[1] / 9.80665 * 1000);
+    d->z_ = (data.data[2] / 9.80665 * 1000);
 //  qt's sensorfw plugin expects G == 9.81286, but it should be
     //9.80665
     buffer->commit();
