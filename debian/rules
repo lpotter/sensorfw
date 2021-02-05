@@ -1,5 +1,5 @@
 #!/usr/bin/make -f
-
+export DH_VERBOSE=1
 # some commonly used local vars
 comma:= ,
 empty:=
@@ -34,7 +34,7 @@ ifneq (,$(findstring parallel=,$(DEB_BUILD_OPTIONS)))
 endif
 
 # check for build docs
-export MAKE_DOCS := yes
+export MAKE_DOCS := no
 ifneq (,$(findstring nodocs,$(DEB_BUILD_OPTIONS)))
     export MAKE_DOCS = no
 endif
@@ -48,8 +48,8 @@ configure-stamp: builddir
 	dh_testdir
 
 	# Add here commands to configure the package.
-	cd $(BUILD_DIR) && qmake $(QMAKECONFIG) CONFIG+="configs" CONFIG+="autohybris" CONFIG+="legacy" CONFIG+="systemdunit" "QMAKE_CXXFLAGS=$(CFLAGS)" "MAKE_DOCS=$(MAKE_DOCS)" ../$(PROJECT_NAME).pro
-	export LD_RUN_PATH=/usr/lib/sensord-qt5/
+	cd $(BUILD_DIR) && qmake $(QMAKECONFIG) CONFIG+="configs" CONFIG+="legacy" CONFIG+="systemdunit" "QMAKE_CXXFLAGS=$(CFLAGS)" ../$(PROJECT_NAME).pro
+	export LD_RUN_PATH=/usr/lib/$(DEB_HOST_MULTIARCH)/sensord-qt5/
 
 	touch configure-stamp
 
@@ -82,7 +82,7 @@ install: build
 	dh_installdirs
 
 	# Add here commands to install the package into debian/tmp.
-	cd $(BUILD_DIR) && $(MAKE) INSTALL_ROOT=$(CURDIR)/debian/tmp $(MAKE_PARALLEL_PARAMS) install
+	cd $(BUILD_DIR) && $(MAKE) INSTALL_ROOT=$(CURDIR)/debian/tmp -j8 install
 
 # Build architecture-independent files here.
 binary-indep: build install
@@ -93,13 +93,12 @@ binary-arch: build install
 	dh_testdir
 	dh_testroot
 	dh_installchangelogs
-	dh_installdocs
-	dh_install --sourcedir=debian/tmp
+	dh_install --sourcedir=$(CURDIR)/debian/tmp
 	dh_link
 	dh_strip --dbg-package=$(PACKAGE_NAME)-dbg
 	dh_compress
 	dh_fixperms
-	dh_makeshlibs --exclude=/usr/lib/sensord-qt5
+	dh_makeshlibs
 	dh_installdeb
 	dh_shlibdeps
 	dh_gencontrol

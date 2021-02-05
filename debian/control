@@ -9,10 +9,7 @@ Build-Depends: debhelper (>=5),
                libsystemd-dev,
                doxygen,
                graphviz,
-               pkg-config,
-               libhardware-dev,
-               android-headers,
-               libhybris-dev
+               pkg-config
 Standards-Version: 3.7.3
 
 Package: sensorfw-qt5
@@ -47,31 +44,10 @@ Depends: qt5-default, sensorfw-qt5 (= ${binary:Version})
 Description: Sensor framework daemon libraries development headers
  Development headers for sensor framework daemon and libraries.
 
-Package: libsensorfw-qt5-doc
-Section: doc
-Architecture: all
-Priority: optional
-Description: API documentation for libsensorfw
- Doxygen-generated API documentation for sensorfw.
-
-Package: sensorfw-qt5-tests
-Section: tests
-Architecture: any
-Depends: libqt5test5, sensorfw-qt5 (= ${binary:Version}), sysklogd, python, ${shlibs:Depends}
-Description: Unit test cases for sensorfw
-
-Package: libsensorfw-qt5-hybris
-Section: misc
-Priority: extra
-Architecture: any
-Depends: sensorfw-qt5 (= ${binary:Version}), libqt5core5a, libhardware2
-Description: Sensor framework hybris support
- Provides support for hybris Sensor framework backend.
-
 Package: libsensorfw-qt5-configs
 Section: misc
 Priority: extra
 Architecture: any
-Depends: sensorfw-qt5 (= ${binary:Version}), libqt5core5a, libhardware2
+Depends: sensorfw-qt5 (= ${binary:Version}), libqt5core5a
 Description: Sensor framework hybris support
  Provides support for hybris Sensor framework backend.
